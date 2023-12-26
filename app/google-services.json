@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "916117588812",
+    "project_id": "twitter-authentication-task",
+    "storage_bucket": "twitter-authentication-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:916117588812:android:d4d9c76ff2f94636221de9",
+        "android_client_info": {
+          "package_name": "com.erdemserhat.twitterauthentication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHObfAZzmdjnCY1j7c1OC0sOHs2e1Sghg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
