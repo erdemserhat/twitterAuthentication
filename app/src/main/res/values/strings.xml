@@ -3,6 +3,6 @@
     <string name="login_title">CodeChamp.in</string>
     <string name="login_sub_title">Hello , Welcome !</string>
     <string name="login_description">Welcome to codeChamp.in Top platform to coders</string>
-    <string name="login_text">Login</string>
-    <string name="register_text">Sign Up</string>
+    <string name="login_text">Login via Twitter</string>
+    <string name="register_text">Sign Up via Twitter</string>
 </resources>

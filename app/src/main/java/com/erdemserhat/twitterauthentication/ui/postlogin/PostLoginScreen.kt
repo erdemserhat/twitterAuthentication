@@ -1,4 +1,4 @@
-package com.erdemserhat.twitterauthentication
+package com.erdemserhat.twitterauthentication.ui.postlogin
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview

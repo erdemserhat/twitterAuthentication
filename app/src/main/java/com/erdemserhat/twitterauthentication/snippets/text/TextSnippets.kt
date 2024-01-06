@@ -14,4 +14,17 @@ val jockey = FontFamily(
 val inter = FontFamily(
     Font(R.font.inter, FontWeight.W500, FontStyle.Normal),
 
+
+    )
+
+val interBold = FontFamily(
+    Font(R.font.inter_bold, FontWeight.W900, FontStyle.Normal),
+
+
+)
+
+val interExtraBold = FontFamily(
+    Font(R.font.inter_bold, FontWeight.W900, FontStyle.Normal),
+
+
     )

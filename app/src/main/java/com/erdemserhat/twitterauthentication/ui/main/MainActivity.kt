@@ -1,4 +1,4 @@
-package com.erdemserhat.twitterauthentication
+package com.erdemserhat.twitterauthentication.ui.main
 
 import android.os.Bundle
 import android.widget.Toast
@@ -11,23 +11,31 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
+import com.erdemserhat.twitterauthentication.model.TwitterAuthService
+import com.erdemserhat.twitterauthentication.ui.welcome.LoginScreen
 import com.erdemserhat.twitterauthentication.ui.theme.TwitterAuthenticationTheme
-import com.google.firebase.*
+import com.erdemserhat.twitterauthentication.ui.welcome.WelcomeScreenViewModel
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 
-
-
 class MainActivity : ComponentActivity() {
+    /**
+     * Construct an instance of an OAuthProvider using its
+     * Builder with the provider ID Twitter.com
+     */
+    private val provider = OAuthProvider.newBuilder("twitter.com")
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private val pendingResultTask = firebaseAuth.pendingAuthResult
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //Construct an instance of an OAuthProvider using its Builder with the provider ID Twitter.com
-        val provider = OAuthProvider.newBuilder("twitter.com")
-        val firebaseAuth=FirebaseAuth.getInstance()
-
+        //val welcomeScreenViewModel:WelcomeScreenViewModel = WelcomeScreenViewModel { onAuthenticate }
         super.onCreate(savedInstanceState)
-
+        welcomeScreenViewModel = ViewModelProvider(this).get(WelcomeScreenViewModel::class.java)
         //Setting View.
         setContent {
             TwitterAuthenticationTheme {
@@ -38,29 +46,31 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //Greeting("Android")
                     LoginScreen()
+
                 }
             }
         }
 
+    }
 
-
-        val pendingResultTask = firebaseAuth.pendingAuthResult
+    private val onAuthenticate: () -> Unit = {
         if (pendingResultTask != null) {
             // There's something already here! Finish the sign-in for your user.
             pendingResultTask
                 .addOnSuccessListener {
                     // User is signed in.
                     // IdP data available in
-                    // authResult.getAdditionalUserInfo().getProfile().
+                    //authResult.getAdditionalUserInfo().getProfile().
                     // The OAuth access token can also be retrieved:
                     // ((OAuthCredential)authResult.getCredential()).getAccessToken().
                     // The OAuth secret can be retrieved by calling:
                     // ((OAuthCredential)authResult.getCredential()).getSecret().
-                    Toast.makeText(this,"Signed in successfully",Toast.LENGTH_LONG).show()
+                    //Toast.makeText(activity.applicationContext,"Signed in", Toast.LENGTH_LONG).show()
+
                 }
                 .addOnFailureListener {
                     // Handle failure.
-                    Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
+
                 }
         } else {
             // There's no pending result so you need to start the sign-in flow.
@@ -69,39 +79,18 @@ class MainActivity : ComponentActivity() {
             firebaseAuth
                 .startActivityForSignInWithProvider(this, provider.build())
                 .addOnSuccessListener {
-                    // User is signed in.
-                    // IdP data available in
-                    // authResult.getAdditionalUserInfo().getProfile().
-                    // The OAuth access token can also be retrieved:
-                    // ((OAuthCredential)authResult.getCredential()).getAccessToken().
-                    // The OAuth secret can be retrieved by calling:
-                    // ((OAuthCredential)authResult.getCredential()).getSecret().
-                    Toast.makeText(this,"Signed in successfully",Toast.LENGTH_LONG).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
+                    /// User is signed in.
+                    /// IdP data available in
+                    /// auth
+
+
                 }
         }
-
-
-
-
-
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TwitterAuthenticationTheme {
-        Greeting("Android")
-    }
-}
+
+
+
+

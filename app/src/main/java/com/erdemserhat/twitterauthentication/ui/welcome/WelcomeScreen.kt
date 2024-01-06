@@ -1,50 +1,47 @@
-package com.erdemserhat.twitterauthentication
+package com.erdemserhat.twitterauthentication.ui.welcome
 
-import android.content.res.Resources
-import android.content.res.Resources.Theme
-import android.graphics.fonts.FontFamily
-import android.webkit.JavascriptInterface
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import com.erdemserhat.twitterauthentication.R
 import com.erdemserhat.twitterauthentication.snippets.text.inter
+import com.erdemserhat.twitterauthentication.snippets.text.interExtraBold
 import com.erdemserhat.twitterauthentication.snippets.text.jockey
+import com.erdemserhat.twitterauthentication.ui.theme.ButtonColor
 import com.erdemserhat.twitterauthentication.ui.theme.LoginBackgroundColor
-import com.erdemserhat.twitterauthentication.ui.theme.Purple40
 import com.erdemserhat.twitterauthentication.ui.theme.TitleColor
 import com.erdemserhat.twitterauthentication.ui.theme.TwitterAuthenticationTheme
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+
+) {
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -53,7 +50,10 @@ fun LoginScreen() {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             TitleSection()
             GreetingImageAndText()
-            LoginRegisterButtons()
+            LoginRegisterButtons(
+                onLoginClicked = {},
+                onSignUpClicked = {}
+                )
 
 
             
@@ -110,6 +110,7 @@ fun TitleSection() {
 
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun GreetingImageAndText() {
     Column(
@@ -140,6 +141,7 @@ fun GreetingImageAndText() {
             color= TitleColor,
             modifier = Modifier
                 .size(width = 340.dp, height = 60.dp)
+                .basicMarquee()
 
         )
 
@@ -148,15 +150,53 @@ fun GreetingImageAndText() {
 }
 
 @Composable
-fun LoginRegisterButtons() {
+fun LoginRegisterButtons(
+    onLoginClicked:()->Unit,
+    onSignUpClicked:()->Unit
+
+) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onLoginClicked,
+        shape = RoundedCornerShape(30.dp),
+        colors = ButtonDefaults.outlinedButtonColors(containerColor = ButtonColor),
+        modifier = Modifier
+            .size(height = 45.dp, width = 300.dp)
 
 
 
 
     ) {
-        Text(text = "dadasd")
+        Text(
+            text = stringResource(id = R.string.login_text),
+            fontFamily = interExtraBold,
+            fontWeight = FontWeight.W900,
+            color=Color.Black,
+
+
+        )
+    }
+
+    Spacer(modifier = Modifier.size(20.dp))
+
+
+    Button(
+        onClick = onSignUpClicked,
+        shape = RoundedCornerShape(30.dp),
+        colors = ButtonDefaults.outlinedButtonColors(containerColor = ButtonColor),
+        modifier = Modifier
+            .size(height = 45.dp, width = 300.dp)
+
+
+
+
+    ) {
+        Text(
+            text = stringResource(id = R.string.register_text),
+            fontFamily = interExtraBold,
+            fontWeight = FontWeight.W900,
+            color=Color.Black
+
+        )
     }
     
 }
