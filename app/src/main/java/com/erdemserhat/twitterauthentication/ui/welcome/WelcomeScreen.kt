@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.erdemserhat.twitterauthentication.R
 import com.erdemserhat.twitterauthentication.snippets.text.inter
 import com.erdemserhat.twitterauthentication.snippets.text.interExtraBold
@@ -37,11 +37,9 @@ import com.erdemserhat.twitterauthentication.ui.theme.ButtonColor
 import com.erdemserhat.twitterauthentication.ui.theme.LoginBackgroundColor
 import com.erdemserhat.twitterauthentication.ui.theme.TitleColor
 import com.erdemserhat.twitterauthentication.ui.theme.TwitterAuthenticationTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
-@Composable
-fun LoginScreen(
 
-) {
+@Composable
+fun LoginScreen(welcomeScreenViewModel: WelcomeScreenViewModel = viewModel()) {
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -51,8 +49,8 @@ fun LoginScreen(
             TitleSection()
             GreetingImageAndText()
             LoginRegisterButtons(
-                onLoginClicked = {},
-                onSignUpClicked = {}
+                onLoginClicked = {welcomeScreenViewModel.login()},
+                onSignUpClicked = {welcomeScreenViewModel.signUp()}
                 )
 
 
@@ -71,7 +69,7 @@ fun LoginScreen(
 fun LoginScreenPreview() {
     TwitterAuthenticationTheme {
         MaterialTheme {
-            LoginScreen()
+            //LoginScreen({})
         }
     }
 }
